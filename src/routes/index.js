@@ -8,7 +8,8 @@ const upload = multer();
 
 const router = Router();
 
-router.post("/video", upload.single("file"), async (req, res) => {
+// router.post("/video", upload.single("file"), async (req, res) => {
+    router.post("/video", async (req, res) => {
 //     console.log("hasta aca llegue antes de guardar el video")
 //     console.log(req.file)
 //   try {
