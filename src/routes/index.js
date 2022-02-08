@@ -11,26 +11,27 @@ const router = Router();
 router.post("/video", upload.single("file"), async (req, res) => {
   try {
     const arch = req.file;
+    console.log("hasta aca llegue antes de guardar el video")
     await pipeline(
       arch.stream,
-      fs.createWriteStream(`${__dirname}/../uploads/${arch.originalName}`)
+      fs.createWriteStream(`../uploads/${arch.originalName}`)
     );
     await converter.convertToThumbnail(
-      `${__dirname}/../uploads/${arch.originalName}`
+      `../uploads/${arch.originalName}`
     );
-    const dir = fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
+    const dir = fs.realpathSync(`../../thumbnail/`) + "/tn.png";
     res.send("ok");
   } catch (err) {
     console.log(err);
     res.send(err);
   }
 });
-router.post("/thumbnail", function (req, res) {
+router.post("/thumbnail/tn.png", function (req, res) {
   console.log(req.body);
   res.send("ok");
 });
 
-router.get("/thumbnail", (req, res) => {
+router.get("/thumbnail/tn.png", (req, res) => {
   const dir = fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
   res.sendFile(dir);
 });
