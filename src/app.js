@@ -18,7 +18,9 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Unsafe-url, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Referrer-Policy', 'unsafe-url')
+  res.header('Referrer-Policy', 'unsafe-url');
+  req.header('Referrer-Policy', 'unsafe-url');
+  
   next();
 });
 
