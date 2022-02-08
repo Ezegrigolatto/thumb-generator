@@ -20,7 +20,7 @@ router.post("/video", upload.single("file"), async (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    const dir=fs.realpathSync(`${__dirname}/../../thumbnail/`) + "\\tn.png";
+    const dir=fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
     console.log(dir)
     res.sendFile(dir);
 })
