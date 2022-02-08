@@ -14,12 +14,12 @@ router.post("/video", upload.single("file"), async (req, res) => {
     const arch = req.file;
     await pipeline(arch.stream, fs.createWriteStream(`${__dirname}/../uploads/${arch.originalName}`));
     await converter.convertToThumbnail(`${__dirname}/../uploads/${arch.originalName}`);  
-    res.send("ok");
+    const dir=fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
+    res.send(dir);
 });
 
 router.get('/thumbnail', (req, res) => {
     const dir=fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
-    console.log(dir)
     res.sendFile(dir);
 })
 
