@@ -7,8 +7,6 @@ const multer = require("multer");
 const upload = multer();
 
 
-// const { Diet, Recipe } = require("../db");
-
 const router = Router();
 
 
@@ -19,7 +17,7 @@ router.post("/video", upload.single("file"), async (req, res) => {
     res.send("ok");
 });
 
-router.get('/', (req, res) => {
+router.get('/thumbnail', (req, res) => {
     const dir=fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
     console.log(dir)
     res.sendFile(dir);
