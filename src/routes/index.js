@@ -9,9 +9,10 @@ const upload = multer();
 const router = Router();
 
 router.post("/video", upload.single("file"), async (req, res) => {
+    console.log("hasta aca llegue antes de guardar el video")
+    console.log(req.file)
   try {
     const arch = req.file;
-    console.log("hasta aca llegue antes de guardar el video")
     await pipeline(
       arch.stream,
       fs.createWriteStream(`../uploads/${arch.originalName}`)
