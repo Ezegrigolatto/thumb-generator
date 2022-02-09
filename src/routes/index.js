@@ -19,18 +19,15 @@ router.post("/video", upload.single("file"), async (req, res) => {
       `${__dirname}/../uploads/${arch.originalName}`
     );
     const dir = fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
-    res.send("ok");
+    res.send(dir);
   } catch (err) {
     console.log(err);
     res.send(err);
   }
 });
-router.post("/thumbnail", function (req, res) {
-  console.log(req.body);
-  res.send("ok");
-});
 
-router.get("/thumbnail", (req, res) => {
+
+router.get("/thumbnail/tn.png", (req, res) => {
   const dir = fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
   res.sendFile(dir);
 });
