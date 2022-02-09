@@ -11,9 +11,7 @@ const router = Router();
 router.post("/video", upload.single("file"), async (req, res) => {
   try {
     const arch = req.file;
-    await pipeline(
-      fs.unlinkSync(`${__dirname}/../../thumbnail/tn.png`)
-    )
+    fs.unlinkSync(`${__dirname}/../../thumbnail/tn.png`)
     await pipeline(
       arch.stream,
       fs.createWriteStream(`${__dirname}/../uploads/${arch.originalName}`)
