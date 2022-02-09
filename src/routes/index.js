@@ -11,7 +11,6 @@ const router = Router();
 router.post("/video", upload.single("file"), async (req, res) => {
   try {
     const arch = req.file;
-    fs.unlinkSync(`${__dirname}/../../thumbnail/tn.png`)
     await pipeline(
       arch.stream,
       fs.createWriteStream(`${__dirname}/../uploads/${arch.originalName}`)
@@ -19,9 +18,9 @@ router.post("/video", upload.single("file"), async (req, res) => {
     await converter.convertToThumbnail(
       `${__dirname}/../uploads/${arch.originalName}`
     );
-    const protocol = req.protocol;
+  
     const host = req.get("host");
-    res.send(`${protocol}://${host}/thumbnail/tn.png`);
+    res.send(`https://${host}/thumbnail/tn.png`);
   } catch (err) {
     console.log(err);
     res.send(err);
