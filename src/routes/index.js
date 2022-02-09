@@ -18,8 +18,11 @@ router.post("/video", upload.single("file"), async (req, res) => {
     await converter.convertToThumbnail(
       `${__dirname}/../uploads/${arch.originalName}`
     );
+    const protocol = req.protocol;
+    const host = req.get("host");
+    const url = req.originalUrl;
     const dir = fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
-    res.send(dir);
+    res.send(`${protocol}://${host}-${url}/-${dir}`);
   } catch (err) {
     console.log(err);
     res.send(err);
