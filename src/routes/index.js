@@ -27,9 +27,30 @@ router.post("/video", upload.single("file"), async (req, res) => {
   }
 });
 
+router.post("/image", upload.single("file"), async (req, res) => {
+  try {
+    const arch = req.file;
+    await pipeline(
+      arch.stream,
+      fs.createWriteStream(`${__dirname}/../uploads/${arch.originalName}`)
+    );
+    const protocol = req.protocol;
+    const host = req.get("host");
+    res.send(`${protocol}://${host}/uploads/${arch.originalName}`);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+})
 
 router.get("/thumbnail/tn.png", (req, res) => {
   const dir = fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
+  res.sendFile(dir);
+});
+
+router.get("/uploads/:file", (req, res) => {
+  const file = req.params;
+  const dir = fs.realpathSync(`${__dirname}/../../uploads/`) + "/" + file;
   res.sendFile(dir);
 });
 
