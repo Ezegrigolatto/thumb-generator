@@ -20,9 +20,7 @@ router.post("/video", upload.single("file"), async (req, res) => {
     );
     const protocol = req.protocol;
     const host = req.get("host");
-    const url = req.originalUrl;
-    const dir = fs.realpathSync(`${__dirname}/../../thumbnail/`) + "/tn.png";
-    res.send(`${protocol}://${host}-${url}/-${dir}`);
+    res.send(`${protocol}://${host}/thumbnail/tn.png`);
   } catch (err) {
     console.log(err);
     res.send(err);
