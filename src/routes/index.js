@@ -35,7 +35,7 @@ router.post("/image", upload.single("file"), async (req, res) => {
       fs.createWriteStream(`${__dirname}/../uploads/${arch.originalName}`)
     );
     const host = req.get("host");
-    res.send(`https://${host}/uploads/${arch.originalName}`);
+    res.send(`https://${host}/uploads?file=${arch.originalName}`);
   } catch (err) {
     console.log(err);
     res.send(err);
