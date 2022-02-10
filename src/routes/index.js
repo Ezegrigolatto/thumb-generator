@@ -49,7 +49,7 @@ router.get("/thumbnail/tn.png", (req, res) => {
 
 router.get("/uploads", (req, res) => {
   const {file} = req.query;
-  const dir = fs.realpathSync(`${__dirname}/../../uploads/`) + file;
+  const dir = fs.realpathSync(`${__dirname}/../uploads/`) + file;
   res.sendFile(dir);
 });
 
