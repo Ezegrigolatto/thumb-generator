@@ -18,7 +18,6 @@ router.post("/video", upload.single("file"), async (req, res) => {
     await converter.convertToThumbnail(
       `${__dirname}/../uploads/${arch.originalName}`
     );
-  
     const host = req.get("host");
     res.send(`https://${host}/thumbnail/tn.png`);
   } catch (err) {
@@ -40,6 +39,11 @@ router.post("/image", upload.single("file"), async (req, res) => {
     console.log(err);
     res.send(err);
   }
+})
+
+router.get("thumbnail",(req,res)=>{
+  const host = req.get("host");
+    res.send(`https://${host}/uploads?file=${arch.originalName}`);
 })
 
 router.get("/thumbnail/tn.png", (req, res) => {
