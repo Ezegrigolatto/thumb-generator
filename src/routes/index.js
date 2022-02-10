@@ -43,7 +43,7 @@ router.post("/image", upload.single("file"), async (req, res) => {
 
 router.get("/thumbnail",(req,res)=>{
   const host = req.get("host");
-    res.send(`https://${host}/uploads?file=${arch.originalName}`);
+    res.send(`https://${host}/thumbnail/tn.png`);
 })
 
 router.get("/thumbnail/tn.png", (req, res) => {
