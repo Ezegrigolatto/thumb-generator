@@ -41,7 +41,7 @@ router.post("/image", upload.single("file"), async (req, res) => {
   }
 })
 
-router.get("thumbnail",(req,res)=>{
+router.get("/thumbnail",(req,res)=>{
   const host = req.get("host");
     res.send(`https://${host}/uploads?file=${arch.originalName}`);
 })
