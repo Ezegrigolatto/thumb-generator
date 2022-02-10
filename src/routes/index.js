@@ -34,9 +34,8 @@ router.post("/image", upload.single("file"), async (req, res) => {
       arch.stream,
       fs.createWriteStream(`${__dirname}/../uploads/${arch.originalName}`)
     );
-    const protocol = req.protocol;
     const host = req.get("host");
-    res.send(`${protocol}://${host}/uploads/${arch.originalName}`);
+    res.send(`https://${host}/uploads/${arch.originalName}`);
   } catch (err) {
     console.log(err);
     res.send(err);
@@ -48,8 +47,8 @@ router.get("/thumbnail/tn.png", (req, res) => {
   res.sendFile(dir);
 });
 
-router.get("/uploads/:file", (req, res) => {
-  const file = req.params;
+router.get("/uploads", (req, res) => {
+  const {file} = req.query;
   const dir = fs.realpathSync(`${__dirname}/../../uploads/`) + "/" + file;
   res.sendFile(dir);
 });
